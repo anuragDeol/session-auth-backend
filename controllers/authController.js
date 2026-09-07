@@ -1,6 +1,6 @@
 const User = require('../models/User');
 
-// 5a. Register
+// 4a. Register
 exports.register = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
     }
 }
 
-// 5b. Login
+// 4b. Login
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
     }
 }
 
-// 5c. Logout
+// 4c. Logout
 exports.logout = (req, res) => {
     req.session.destroy((error) => {
         if(error) {
@@ -70,7 +70,7 @@ exports.logout = (req, res) => {
     });
 }
 
-// 5d. Redirect to Home
+// 4d. Redirect to Home
 exports.home = (req, res) => {
     res.json({
         message: 'Welcome Home',
@@ -80,10 +80,3 @@ exports.home = (req, res) => {
         }
     });
 }
-
-// app.get('/home', isAuth, (req, res) => {
-//     res.status(200).json({
-//         message: `Welcome ${req.session.user.username}!`,
-//         sessionData: req.session.user
-//     });
-// });
