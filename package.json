@@ -4,8 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --env-file=.env --watch server.js",
-    "start": "node --env-file=.env server.js"
+    "start": "node --env-file=.env --watch server.js",
+    "build": "node --env-file=.env server.js"
   },
   "author": "anurag",
   "license": "ISC",
@@ -13,6 +13,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "connect-mongo": "^6.0.0",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "mongoose": "^9.9.5",

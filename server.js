@@ -1,10 +1,16 @@
 const express = require('express');
 const sessions = require('express-session');
+const cors = require('cors');
 const MongoStore = require('connect-mongo').default;
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 // 1. Global Middleware: Parse incoming request bodies
 app.use(express.json());
