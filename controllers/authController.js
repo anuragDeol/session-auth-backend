@@ -46,7 +46,11 @@ exports.login = async (req, res) => {
         req.session.username = user.username;
 
         res.status(200).json({
-            message: 'Logged in successfully!'
+            message: 'Logged in successfully!',
+            user: {
+                id: user._id,
+                username: user.username
+            }
         });
     } catch(error) {
         res.status(500).json({
@@ -73,7 +77,7 @@ exports.logout = (req, res) => {
 // 4d. Redirect to Home
 exports.home = (req, res) => {
     res.json({
-        message: 'Welcome Home',
+        message: 'User Authenticated',
         user: {
             id: req.session.userId,
             username: req.session.username
