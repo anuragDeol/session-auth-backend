@@ -8,6 +8,6 @@ router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 
 // protected route
-router.get('/home', isAuthenticated, authController.home);
+router.get('/me', isAuthenticated, authController.me);
 
 module.exports = router;

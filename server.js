@@ -7,27 +7,15 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+// 1. Global Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }));
 
-// 1. Global Middleware: Parse incoming request bodies
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// 2. Connect to MongoDB
-connectDB().then(() => {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Server up and running on port: ${PORT} 🚀`);
-  });
-}).catch((err) => {
-  console.error('App failed to boot:', err.message);
-  process.exit(1);
-});
-
-// 3. Express-Session middleware configuration with MongoStore
+// 2. Express-Session middleware configuration with MongoStore
 app.use(
     sessions({
         name: 'anurag-auth-session-cookie',
@@ -38,7 +26,7 @@ app.use(
             // clientPromise,
             mongoUrl: process.env.MONGO_URI,
             collectionName: 'sessions',                     // target collection name in mongodb
-            ttl: 14 * 24 * 60 * 60                          // session expiration time (14 days)
+            ttl: 24 * 60 * 60                          // session expiration time (1 day)
         }),
         cookie: {
             maxAge: 1000 * 60 * 60 * 24,                    // cookie expiration (1 day)
@@ -49,5 +37,16 @@ app.use(
     })
 );
 
-// 4. Mount Routes
+// 3. Mount Routes
 app.use('/api/auth', authRoutes);
+
+// 4. Connect to MongoDB
+connectDB().then(() => {
+  const PORT = process.env.PORT || 7000;
+  app.listen(PORT, () => {
+    console.log(`Server up and running on port: ${PORT} 🚀`);
+  });
+}).catch((err) => {
+  console.error('App failed to boot:', err.message);
+  process.exit(1);
+});
