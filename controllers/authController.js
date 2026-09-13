@@ -1,6 +1,5 @@
 const User = require('../models/User');
 
-// 4a. Register
 exports.register = async (req, res) => {
     const { username, password } = req.body;
     if(!username || !password) {
@@ -38,7 +37,6 @@ exports.register = async (req, res) => {
     }
 }
 
-// 4b. Login
 exports.login = async (req, res) => {
     const { username, password } = req.body;
     if(!username || !password) {
@@ -80,7 +78,6 @@ exports.login = async (req, res) => {
     }
 }
 
-// 4c. Logout
 exports.logout = (req, res) => {
     try {
         req.session.destroy((error) => {
@@ -104,7 +101,6 @@ exports.logout = (req, res) => {
     }
 }
 
-// 4d. Session Info about the user
 exports.me = (req, res) => {
     return res.json({
         user: {

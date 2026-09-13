@@ -7,12 +7,13 @@ const authRoutes = require('./routes/authRoutes');
 const { default: mongoose } = require("mongoose");
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 7000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
     credentials: true
 }));
 
@@ -33,7 +34,7 @@ async function startServer() {
                 maxAge: 1000 * 60 * 60 * 24,
                 httpOnly: true,
                 secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax'
+                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
             }
         })
     );
