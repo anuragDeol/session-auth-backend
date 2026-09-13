@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const { sessionCookieOptions } = require("../config/sessionConfig");
+const sessionCookieOptions = require("../config/sessionConfig");
 
 exports.register = async (req, res) => {
     const { username, password } = req.body;
