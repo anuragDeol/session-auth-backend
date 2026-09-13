@@ -23,7 +23,11 @@ exports.register = async (req, res) => {
         req.session.userId = user._id;
         req.session.username = user.username;
         res.status(201).json({
-            message: 'User registered (and logged in) successfully'
+            message: 'User registered and logged in successfully',
+            user: {
+                id: user._id,
+                username: user.username
+            }
         });
         return;
     } catch (error) {
@@ -88,7 +92,7 @@ exports.logout = (req, res) => {
             }
             res.clearCookie('anurag-auth-session-cookie');     // Clears default express-session cookie
             res.status(200).json({
-                message: 'Logged out successfully (session destroyed)'
+                message: 'Logged out successfully'
             });
             return;
         });

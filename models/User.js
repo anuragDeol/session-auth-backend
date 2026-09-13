@@ -24,6 +24,7 @@ UserSchema.pre('save', async function() {
         this.password = await bcrypt.hash(this.password, salt);
     } catch(error) {
         console.error('Error in saving user to db:', error);
+        throw error;
     }
 });
 
