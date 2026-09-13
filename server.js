@@ -5,6 +5,7 @@ const MongoStore = require('connect-mongo').default;
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const { default: mongoose } = require("mongoose");
+const sessionCookieOptions = require('./config/sessionConfig');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -31,10 +32,8 @@ async function startServer() {
                 ttl: 24 * 60 * 60
             }),
             cookie: {
+                ...sessionCookieOptions,
                 maxAge: 1000 * 60 * 60 * 24,
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
             }
         })
     );

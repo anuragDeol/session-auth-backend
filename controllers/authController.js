@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const { sessionCookieOptions } = require("../config/sessionConfig");
 
 exports.register = async (req, res) => {
     const { username, password } = req.body;
@@ -87,7 +88,7 @@ exports.logout = (req, res) => {
                     error: 'Something went wrong. Cannot log out user successfully.'
                 });
             }
-            res.clearCookie('anurag-auth-session-cookie');     // Clears default express-session cookie
+            res.clearCookie('anurag-auth-session-cookie', sessionCookieOptions);
             res.status(200).json({
                 message: 'Logged out successfully'
             });
