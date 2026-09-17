@@ -26,7 +26,8 @@ exports.register = async (req, res) => {
             message: 'User registered and logged in successfully',
             user: {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                expiresAt: req.session.cookie.expires
             }
         });
         return;
@@ -67,7 +68,8 @@ exports.login = async (req, res) => {
             message: 'Logged in successfully!',
             user: {
                 id: user._id,
-                username: user.username
+                username: user.username,
+                expiresAt: req.session.cookie.expires
             }
         });
         return;
@@ -106,7 +108,8 @@ exports.me = (req, res) => {
     return res.json({
         user: {
             id: req.session.userId,
-            username: req.session.username
+            username: req.session.username,
+            expiresAt: req.session.cookie.expires
         }
     });
 }
